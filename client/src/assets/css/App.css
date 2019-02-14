@@ -2,3 +2,20 @@ body {
     font-family: Roboto;
 }
 
+.App {
+    height: 100vh;
+}
+
+/*
+ * LANDING COMPONENT CSS
+ */
+.landing {
+    height: 100%;
+}
+
+.landingActionZone {
+    text-align: center;
+}
+/*
+ * END
+ */
