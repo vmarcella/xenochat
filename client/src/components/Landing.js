@@ -6,6 +6,9 @@ import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
+
+import { Link } from 'react-router-dom';
+
 // Landing page 
 class Landing extends Component {
 
@@ -29,7 +32,7 @@ class Landing extends Component {
                         >
                             <Grid item xs={6}>
                                 <Card className="registerCard">
-                                    <CardActionArea>
+                                    <CardActionArea component={Link} to="/register">
                                         <CardContent>
                                             <h1>Register</h1>
                                         </CardContent>
@@ -38,7 +41,7 @@ class Landing extends Component {
                             </Grid>
                             <Grid item xs={6}>
                                 <Card className="loginCard">
-                                    <CardActionArea>
+                                    <CardActionArea component={Link} to="/login">
                                         <CardContent>
                                             <h1>Login</h1>
                                         </CardContent>
