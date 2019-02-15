@@ -21,22 +21,22 @@ const routes = [
 ]
 
 class App extends Component {
-    registerRoutes() {
-
-    }
     render() {
+        const createRoutes = () => {
+            return routes.map((route, i) => (
+                <Route 
+                    key={i}
+                    exact
+                    path={route.path}
+                    component={route.component}
+                >
+                </Route>
+            ))     
+        }
         return (
         <BrowserRouter>
             <div className="App">
-                {routes.map((route, i) => (
-                    <Route
-                        key={1}
-                        exact
-                        path={route.path}
-                        component={route.component}
-                    >
-                    </Route>
-                ))} 
+                {createRoutes()}
             </div>
         </BrowserRouter>
         );
