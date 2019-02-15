@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 // Material imports
 import Paper from '@material-ui/core/Paper';
@@ -6,8 +7,6 @@ import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
-
-import { Link } from 'react-router-dom';
 
 // Landing page 
 class Landing extends Component {

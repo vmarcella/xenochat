@@ -33,3 +33,33 @@ body {
 /*
  * END
  */
+
+/*
+ * REGISTER COMPONENT CSS
+ */
+
+.registerGrid {
+    min-height: 100%;
+}
+
+.registerContainer {
+    padding: 20px;
+}
+
+.registerContainer > h1 {
+    text-align: center;
+}
+
+.registerForm {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.registerInput {
+    width: 60%;
+}
+
+.registerSubmitBtn {
+    margin-top: 10px !important;
+}
