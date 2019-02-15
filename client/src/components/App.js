@@ -3,15 +3,20 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 
 import Landing from './Landing';
+import Register from './Register';
 
 // Import our assets
 import '../assets/css/App.css';
 
-// Import our 
+// setup our route configs 
 const routes = [
     {
         path: '/',
-        component: Landing
+        component: Landing,
+    },
+    {
+        path: '/register',
+        component: Register,
     }
 ]
 

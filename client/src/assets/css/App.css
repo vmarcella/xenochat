@@ -1,5 +1,9 @@
+:root {
+    
+}
 body {
     font-family: Roboto;
+    background-color: #F9F7DC;
 }
 
 .App {
@@ -9,6 +13,7 @@ body {
 /*
  * LANDING COMPONENT CSS
  */
+
 .landing {
     height: 100%;
 }
@@ -16,6 +21,15 @@ body {
 .landingActionZone {
     text-align: center;
 }
+
+.registerCard {
+    color: #5EBD78;
+}
+
+.loginCard {
+    color: #15878F;
+}
+
 /*
  * END
  */
