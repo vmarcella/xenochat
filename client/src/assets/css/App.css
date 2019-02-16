@@ -43,7 +43,8 @@ body {
 }
 
 .registerContainer {
-    padding: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .registerContainer > h1 {

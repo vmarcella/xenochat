@@ -22,6 +22,7 @@ const routes = [
 
 class App extends Component {
     render() {
+        // Instantiate routes 
         const createRoutes = () => {
             return routes.map((route, i) => (
                 <Route 

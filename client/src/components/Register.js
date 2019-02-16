@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
+import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
 class Register extends Component {
@@ -16,6 +16,10 @@ class Register extends Component {
         }
     }
 
+    componentDidMount() {
+        //Validate that both passwords match eachother
+        ValidatorForm.addValidationRule('isPasswordMatch', (value) => value === this.state.password )
+    }
     render() {
         // Event handler for when someone makes a change to the form
         const handleChange = (event) => {
@@ -33,8 +37,8 @@ class Register extends Component {
                 <Grid item xs={4}>
                     <Paper className="registerContainer">
                         <h1>Sign up for Xenochat</h1>
-                        <form autoComplete="off" className="registerForm">
-                                <TextField
+                        <ValidatorForm autoComplete="off" className="registerForm">
+                                <TextValidator
                                     id="name"
                                     label="username"
                                     name="username"
@@ -44,7 +48,7 @@ class Register extends Component {
                                     margin="normal"
                                     className="registerInput"
                                 />
-                                <TextField
+                                <TextValidator
                                     id="email"
                                     label="email"
                                     name="email"
@@ -54,7 +58,7 @@ class Register extends Component {
                                     margin="normal"
                                     className="registerInput"
                                 />
-                                <TextField
+                                <TextValidator
                                     id="email"
                                     label="Password"
                                     name="password"
@@ -64,9 +68,10 @@ class Register extends Component {
                                     margin="normal"
                                     className="registerInput"
                                 />
-                                <TextField
+                                <TextValidator
                                     id="email"
                                     label="Confirm Password"
+                                    name='confirmPassword'
                                     type="password"
                                     value={this.state.confirmPassword}
                                     onChange={handleChange}
@@ -76,7 +81,7 @@ class Register extends Component {
                                 <Button color="primary" type="submit" className="registerSubmitBtn">
                                     Submit
                                 </Button>
-                        </form> 
+                        </ValidatorForm> 
                     </Paper>
                 </Grid>
             </Grid>
