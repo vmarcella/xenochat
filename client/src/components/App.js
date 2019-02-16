@@ -4,6 +4,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 
 import Landing from './Landing';
 import Register from './Register';
+import Login from './Login';
 
 // Import our assets
 import '../assets/css/App.css';
@@ -17,6 +18,10 @@ const routes = [
     {
         path: '/register',
         component: Register,
+    },
+    {
+        path: '/login',
+        component: Login,
     }
 ]
 

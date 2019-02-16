@@ -88,6 +88,7 @@ class Register extends Component {
                                     className="registerInput"
                                     validators={['required', 'isPasswordMatch']}
                                     errorMessages={['This field is required!', 'The passwords must match!']}
+                                    required
                                 />
                                 <Button color="primary" type="submit" className="registerSubmitBtn">
                                     Submit
