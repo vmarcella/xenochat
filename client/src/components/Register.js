@@ -40,23 +40,29 @@ class Register extends Component {
                         <ValidatorForm autoComplete="off" className="registerForm">
                                 <TextValidator
                                     id="name"
-                                    label="username"
+                                    label="Username"
                                     name="username"
                                     type="text"
                                     value={this.state.username}
                                     onChange={handleChange}
                                     margin="normal"
                                     className="registerInput"
+                                    validators={['required', 'minStringLength:6']}
+                                    errorMessages={['This field is required!', 'Names must be at least 3 characters']}
+                                    required
                                 />
                                 <TextValidator
                                     id="email"
-                                    label="email"
+                                    label="Email"
                                     name="email"
                                     type="email"
                                     value={this.state.email}
                                     onChange={handleChange}
                                     margin="normal"
                                     className="registerInput"
+                                    validators={['required', 'isEmail']}
+                                    errorMessages={['This field is required!', 'Must be a valid email!']}
+                                    required
                                 />
                                 <TextValidator
                                     id="email"
@@ -67,6 +73,9 @@ class Register extends Component {
                                     onChange={handleChange}
                                     margin="normal"
                                     className="registerInput"
+                                    validators={['required']}
+                                    errorMessages={['This field is required!']}
+                                    required
                                 />
                                 <TextValidator
                                     id="email"
@@ -77,6 +86,8 @@ class Register extends Component {
                                     onChange={handleChange}
                                     margin="normal"
                                     className="registerInput"
+                                    validators={['required', 'isPasswordMatch']}
+                                    errorMessages={['This field is required!', 'The passwords must match!']}
                                 />
                                 <Button color="primary" type="submit" className="registerSubmitBtn">
                                     Submit
