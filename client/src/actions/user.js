@@ -6,9 +6,10 @@ export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
 
 // Register action creator (get dispatched to make state changes)
-export const register = (registerData) => {
+export const register = (formData) => {
     return {
         type: REGISTER,
+        formData,
     }
 }
 

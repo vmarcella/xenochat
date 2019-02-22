@@ -18,13 +18,16 @@ const userReducer = async (state=null, action) => {
             try {
                 const response = await axios.put('/auth/signin', action.formData);
                 console.log()
-            }catch(err) {
+                localStorage.setItem('xenoInfo', response.body);
+                return state = response.body;
+            }catch(error) {
                 console.error(error);
             }
         case LOGOUT:
             localStorage.setItem('xenoInfo', null)
             return state = null;
-
+        default:
+            return state;
     }
 }
 
