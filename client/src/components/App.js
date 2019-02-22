@@ -39,6 +39,7 @@ class App extends Component {
                 </Route>
             ))     
         }
+
         return (
         <BrowserRouter>
             <div className="App">
