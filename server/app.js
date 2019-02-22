@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
@@ -45,3 +47,7 @@ app.use((err, req, res) => {
 });
 
 module.exports = app;
+
+app.listen(8000, () => {
+    console.log('Server is active')
+})
