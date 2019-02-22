@@ -41,7 +41,7 @@ class Register extends Component {
                 <Grid item xs={4}>
                     <Paper className="registerContainer">
                         <h1>Sign up for Xenochat</h1>
-                        <ValidatorForm autoComplete="off" className="registerForm">
+                        <ValidatorForm onSubmit={() => this.props.register(this.state)} className="registerForm">
                                 <TextValidator
                                     id="name"
                                     label="Username"
@@ -94,7 +94,7 @@ class Register extends Component {
                                     errorMessages={['This field is required!', 'The passwords must match!']}
                                     required
                                 />
-                                <Button onSubmit={() => this.props.register(this.state).bind(this)}color="primary" type="submit" className="registerSubmitBtn">
+                                <Button color="primary" type="submit" className="registerSubmitBtn">
                                     Submit
                                 </Button>
                         </ValidatorForm> 

@@ -17,7 +17,7 @@ import Login from './Login';
 import '../assets/css/App.css';
 
 // Create the redux store
-const store = createStore(reducers)
+const store = createStore(reducers);
 
 // setup our route configs 
 const routes = [
@@ -35,20 +35,11 @@ const routes = [
     }
 ]
 
-// Get the uesr if they're signed in.
-const getUser = () => {
-    return localStorage.getItem('xenotoken')
-}
-
 // Main application
 class App extends Component {
     // Initialize the app with props and set the state
     constructor(props) {
         super(props);
-
-        this.state = {
-            user: getUser(),
-        };
     }
 
     render() {
@@ -60,13 +51,10 @@ class App extends Component {
                     key={i}
                     exact
                     path={route.path}
-                    render={(routeProps) => (
-                    
-                        <route.component {...this.state.user}  />
-                    )}
+                    component={route.component} 
                 >
                 </Route>
-            ))     
+            ));     
         }
 
         return (
