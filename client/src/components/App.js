@@ -3,8 +3,9 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 
 // Grab the redux store and provider to allow components to access it
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
 
 import reducers from '../reducers/index';
 
@@ -17,7 +18,7 @@ import Login from './Login';
 import '../assets/css/App.css';
 
 // Create the redux store
-const store = createStore(reducers);
+const store = createStore(reducers, applyMiddleware(thunk));
 
 // setup our route configs 
 const routes = [

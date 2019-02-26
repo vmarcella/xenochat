@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import { connect } from 'react-redux';
-import { register } from '../actions/user';
+import { registerUser } from '../actions/user';
 
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
@@ -41,7 +41,7 @@ class Register extends Component {
                 <Grid item xs={4}>
                     <Paper className="registerContainer">
                         <h1>Sign up for Xenochat</h1>
-                        <ValidatorForm onSubmit={() => this.props.register(this.state)} className="registerForm">
+                        <ValidatorForm onSubmit={() => this.props.registerUser(this.state)} className="registerForm">
                                 <TextValidator
                                     id="name"
                                     label="Username"
@@ -117,7 +117,7 @@ const mapStateToProps = (state) => {
 // component props
 const mapDispatchToProps = () => {
     return {
-        register,
+        registerUser,
     }
 }
 
