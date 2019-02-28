@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Grid, Paper, Typography } from '@material-ui/core'
+import { GridList, GridListTile, Grid, Paper, Typography } from '@material-ui/core'
 import { connectToServer, newMessage, newChannel } from './api';
 
 import { logoutUser } from '../../actions/user';
@@ -36,17 +36,65 @@ class Server extends Component {
     render() {
         if(this.props.user) {
             return (
-                <Grid container justify='center'>
-                    <Grid item xs={12} md={6}>
-                        <Paper>
-                            <Typography variant="h1">xenochat</Typography>
-                        </Paper>
+                <>
+                <div style={styles.root}>
+                    <Grid container justify="center">
+                        <Grid item xs={12} md={8} lg={8}>
+                            <Paper>
+                                <Typography style={styles.headerText} variant="h1">Xenochat</Typography>
+                            </Paper>
+                        </Grid>
                     </Grid>
-                </Grid> 
+                    <Grid container style={styles.activeContainer} justify="center">
+                        <Grid item xs={6} md={6} lg={4} style={styles.activeChannels}> 
+                            <Paper>
+                                hi
+                            </Paper>
+                        </Grid>
+                        <Grid item xs={6} md={6} lg={4} style={styles.activeUsers}>
+                            <Paper>
+                                below hi
+                            </Paper>
+                        </Grid>
+                    </Grid>
+                    <Grid style={styles.messageContainer} container justify="center">
+                        <Grid item xs={12} md={8} lg={12}>
+
+                            <Paper>
+                                below hi
+                            </Paper>
+                        </Grid>
+                    </Grid>
+                </div>
+               </>
             )
         }
     }
 }
+
+
+const styles = {
+    root: {
+        height: '100vh',
+    },
+    headerText: {
+        textAlign: 'center',
+    },
+    activeContainer: {
+        margin: '10px 0'
+    },
+    activeChannels: {
+        padding: '0 10px',
+    },
+    activeUsers: {
+        padding: '0 10px',
+    },
+    messageContainer: {
+        margin: '10px 0',
+        padding: '0 10px',
+    }
+    
+} 
 
 // Takes in the entire state and maps the application state to
 // props on the component
