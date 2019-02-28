@@ -13,6 +13,7 @@ import reducers from '../reducers/index';
 import Landing from './Landing';
 import Register from './Register';
 import Login from './Login';
+import Server from './Server/Server';
 
 // Import our assets
 import '../assets/css/App.css';
@@ -33,6 +34,10 @@ const routes = [
     {
         path: '/login',
         component: Login,
+    },
+    {
+        path:'/chat',
+        component: Server, 
     }
 ]
 
