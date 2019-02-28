@@ -36,6 +36,37 @@ class Server extends Component {
         connectToServer(client);
     }
 
+    // create a new user
+    newUser = (username) => {
+        const onlineUsers = this.onlineUsers;
+        onlineUsers.push(username)
+        this.setState({onlineUsers})
+    }
+
+    // create a new message
+    newMessage = (message) => {
+        const messages = this.state.messages;
+        messages.push(message);
+        this.setState({ messages })
+    }
+
+    // create a new channel
+    newChannel = (channel) => {
+        const channels = this.state.channels;
+        channels.push(channel);
+        this.setState({ channels })
+    }
+
+    // Change the current channel
+    changeChannel = (channel) => {
+        
+    }
+
+    // Get all online users 
+    onlineUsers = (onlineUsers) => {
+        this.setState({ onlineUsers });
+    }
+
     updateMessage = (e) => {
         this.setState({
             currentMessage: e.target.value,
