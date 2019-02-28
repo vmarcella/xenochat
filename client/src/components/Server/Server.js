@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Grid } from '@material-ui/core'
+import { Grid, Paper, Typography } from '@material-ui/core'
 import { connectToServer, newMessage, newChannel } from './api';
 
 import { logoutUser } from '../../actions/user';
@@ -36,8 +36,12 @@ class Server extends Component {
     render() {
         if(this.props.user) {
             return (
-                <Grid container xs={12}>
-
+                <Grid container justify='center'>
+                    <Grid item xs={12} md={6}>
+                        <Paper>
+                            <Typography variant="h1">xenochat</Typography>
+                        </Paper>
+                    </Grid>
                 </Grid> 
             )
         }

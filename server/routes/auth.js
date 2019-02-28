@@ -18,8 +18,15 @@ router.post('/signup', async (req, res, next) => {
         }, process.env.SECRET, {
             expiresIn: '60 days',
         });
-        
-        return res.json(token);
+
+        // What to send the user for storage
+        const xenoUser = {
+            username: user.username,
+            _id: savedUser._id,
+            token
+        }
+
+        return res.json(xenoUser);
     } catch(err){
         next(err);
     }
