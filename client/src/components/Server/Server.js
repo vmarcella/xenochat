@@ -5,16 +5,16 @@ import { connectToServer, newMessage, newChannel } from './api';
 
 import Message from './Message';
 
-import { logoutUser } from '../../actions/user';
+import { loginUser, logoutUser } from '../../actions/user';
 
 class Server extends Component {
     constructor(props) {
         super(props);
-
         this.state = {
             channel: 'General',
-            onlineUsers: [],
-            messages: ['test'],
+            channels: ['General'],
+            onlineUsers: [this.props.user.firstName],
+            messages: [],
             currentMessage: '',
         }
     }
@@ -68,13 +68,26 @@ class Server extends Component {
                         <Grid item xs={6} md={6} lg={4} style={styles.activeChannels}> 
                             <Typography style={styles.headerText} variant="h3">Active channels</Typography>
                             <Paper>
-                                hi
+                                <GridList>
+                                    {Array.from(this.state.channels).map((channel) => (
+                                        <GridListTile style={{textAlign: 'center', width:'100%'}}>
+                                                <Typography color="primary" variant="p">{channel}</Typography>
+                                        </GridListTile>
+                                    ))}
+
+                                </GridList>
                             </Paper>
                         </Grid>
                         <Grid item xs={6} md={6} lg={4} style={styles.activeUsers}>
                             <Typography style={styles.headerText} variant="h3">Active users</Typography>
                             <Paper>
-                                below hi
+                                <GridList>
+                                    {Array.from(this.state.onlineUsers).map((user) => (
+                                        <GridListTile style={{textAlign: 'center', width:'100%'}}>
+                                                <Typography color="primary" variant="p">{user}</Typography>
+                                        </GridListTile>
+                                    ))}
+                                </GridList>
                             </Paper>
                         </Grid>
                     </Grid>
@@ -128,7 +141,7 @@ const styles = {
         padding: 10
     },
     activeContainer: {
-        margin: '10px 0',
+        margin: '30px 0',
         height: 200,
     },
     activeChannels: {
@@ -138,12 +151,13 @@ const styles = {
         padding: '0 10px',
     },
     messageContainer: {
-        margin: '30px 0',
+        margin: '80px 0',
         padding: '0 15px',
         height: 500,
     },
     messageList: {
         height: 300,
+        width: '100%'
     },
     messageInput: {
         marginTop: 0,
@@ -171,6 +185,7 @@ const mapStateToProps = (state) => {
 // component props
 const mapDispatchToProps = () => {
     return {
+        loginUser,
         logoutUser,
     }
 }

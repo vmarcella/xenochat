@@ -3,7 +3,8 @@ import axios from 'axios';
 import { REGISTER, LOGIN, LOGOUT } from '../actions/user';
 
 // the user reducer for handling the user state
-const userReducer = async (state=null, action) => {
+const userReducer = (state=null, action) => {
+
     switch(action.type) {
         case REGISTER:
             state = action.payload;
@@ -15,6 +16,10 @@ const userReducer = async (state=null, action) => {
             state = null;
             break;
         default:
+            if (state === null) {
+                state = JSON.parse(localStorage.getItem('user'));
+                console.log(state)
+            }
             return state;
     }
     return state;

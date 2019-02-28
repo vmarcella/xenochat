@@ -3,11 +3,11 @@ import { Grid, Typography } from '@material-ui/core';
 
 export default (props) => {
     return (
-        <Grid container direction="row">
+        <Grid container direction="row" alignItems="center">
             <Grid style={styles.name}item xs={4} md={4} lg={4}>
-                <Typography variant="p" color="primary">fdsafdsdfs</Typography>
+                <Typography variant="p" color="primary">{props.user.firstName}</Typography>
             </Grid>
-            <Grid style={styles.message } item xs={8} md={8} lg={8}>
+            <Grid style={styles.message } item xs={8} md={8} lg={4}>
                 <Typography color="secondary" variant="p">{props.message}</Typography>
             </Grid>
         </Grid>

@@ -48,6 +48,9 @@ class App extends Component {
         super(props);
     }
 
+    componentWillMount() {
+    }
+
     render() {
 
         // Instantiate routes 
