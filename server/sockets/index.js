@@ -2,7 +2,7 @@
 const socketio = require('socket.io');
 
 // Import chat listener
-const handleChat = require('./chat');
+const chat = require('./chat');
 
 // Instantiate the server with basic
 const serverInfo = {
@@ -20,7 +20,7 @@ const createSocket = (app) => {
 
     // Register how to handle any connection being made to our
     io.on('connection', (socket) => {
-        handleChat(io, socket, serverInfo);
+        chat.handleChat(io, socket, serverInfo);
     });
 };
 
