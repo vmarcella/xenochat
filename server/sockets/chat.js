@@ -16,7 +16,7 @@ const handleChat = (io, socket, serverInfo) => {
     // When a new message has been sent by a user 
     socket.on('new message', (data) => {
         console.log(`${data.sender}: ${data.message}`);
-        io.to(data.channel).emit('new message', data);
+        io.to(data.channel).emit('new message', data.message);
     });
 
     // When a new channel has been created
@@ -36,13 +36,13 @@ const handleChat = (io, socket, serverInfo) => {
 
     // When a client wants to get all online users
     socket.on('get online users', () => {
-        socket.emit('get online users', onlineUsers);
+        socket.emit('get online users', serverInfo.onlineUsers);
     });
 
     // When the client disconnects
     socket.on('disconnect', () => {
         delete serverInfo.onlineUsers[socket.username];
-        io.emit('user has left', onlineUsers);
+        io.emit('user has left', serverInfo.onlineUsers);
     });
 }
 

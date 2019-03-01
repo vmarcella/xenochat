@@ -19,7 +19,7 @@ class Server extends Component {
         }
     }
 
-    // Handle when the server is mounted
+    // Handle when the server component is mounted
     componentDidMount() {
 
         const client = {
@@ -33,20 +33,24 @@ class Server extends Component {
                 onlineUsers: this.onlineUsers,
             }
         }
+        // Connect the client to the server with any information that will be needed 
+        // to properly handle updating real time events
         connectToServer(client);
     }
 
     // create a new user
     newUser = (username) => {
-        const onlineUsers = this.onlineUsers;
+        console.log(username)
+        const onlineUsers = this.state.onlineUsers;
         onlineUsers.push(username)
         this.setState({onlineUsers})
     }
 
     // create a new message
-    newMessage = (message) => {
+    newMessage = (msg) => {
         const messages = this.state.messages;
-        messages.push(message);
+        messages.push(msg);
+
         this.setState({ messages })
     }
 
@@ -76,18 +80,22 @@ class Server extends Component {
     sendMessage = () => {
         // Msg object to send off to the server
         const msg = {
-            user: this.props.user,
+            username: this.props.user.username,
             message: this.state.currentMessage,
         }
 
         // Create a new message and update all the sent messages on the frontend
         const newMessages = this.state.messages
-        newMessages.push(msg.message)
+        newMessages.push(msg)
 
+        // Update the users state
         this.setState({
             messages: newMessages,
             currentMessage: '',
         })
+
+        // Emit the message to the server after it has been reflected on the users side
+        newMessage(msg);
 
     }
     render() {
@@ -106,7 +114,7 @@ class Server extends Component {
                         <Grid item xs={6} md={6} lg={4} style={styles.activeChannels}> 
                             <Typography style={styles.headerText} variant="h3">Active channels</Typography>
                             <Paper>
-                                <GridList>
+                                <GridList style={styles.channelList} cellHeight={20}>
                                     {Array.from(this.state.channels).map((channel) => (
                                         <GridListTile style={{textAlign: 'center', width:'100%'}}>
                                                 <Typography color="primary" variant="p">{channel}</Typography>
@@ -119,7 +127,7 @@ class Server extends Component {
                         <Grid item xs={6} md={6} lg={4} style={styles.activeUsers}>
                             <Typography style={styles.headerText} variant="h3">Active users</Typography>
                             <Paper>
-                                <GridList>
+                                <GridList style={styles.userList}>
                                     {Array.from(this.state.onlineUsers).map((user) => (
                                         <GridListTile style={{textAlign: 'center', width:'100%'}}>
                                                 <Typography color="primary" variant="p">{user}</Typography>
@@ -134,10 +142,10 @@ class Server extends Component {
                             <Typography style={styles.headerText} variant="h3">Currently speaking in {this.state.channel}</Typography>
                             <Paper>
                                 <GridList style={styles.messageList} cols={1} cellHeight={50} spacing={1}>
-                                    {Array.from(this.state.messages).map((message) => (
+                                    {Array.from(this.state.messages).map((msg) => (
                                         <GridListTile>
                                             <Paper>
-                                            <Message message={message} user={this.props.user}/>
+                                            <Message message={msg.message} user={msg.username}/>
                                             </Paper>
                                         </GridListTile>
                                     ))}
@@ -193,6 +201,14 @@ const styles = {
     },
     activeUsers: {
         padding: '0 10px',
+    },
+    channelList: {
+        height: 200,
+        maxHeight: '100%'
+    },
+    userList: {
+        height: 200,
+        maxHeight: '100%',
     },
     messageContainer: {
         margin: '80px 0',

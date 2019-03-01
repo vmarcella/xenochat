@@ -34,11 +34,11 @@ const registerListeners = (client) => {
 // Connect to the server when the user has signed into it
 export const connectToServer = (client) => {
     socket.emit('new user', client.user.username)
-    registerListeners();
+    registerListeners(client);
 }
 
 // Send a message to the server
-export const sendMessage = (msg) => {
+export const newMessage = (msg) => {
     if (msg.message.length > 0) {
         socket.emit('new message', msg);
         return true;

@@ -4,8 +4,8 @@ import { Grid, Typography } from '@material-ui/core';
 export default (props) => {
     return (
         <>
-            <Typography variant="p" color="primary">{props.user.username}</Typography>
-            <Typography color="secondary" variant="p">{props.message}</Typography>
+            <Typography variant="body1" color="primary">{props.user}</Typography>
+            <Typography color="secondary" variant="body2">{props.message}</Typography>
         </>
     ) 
 }
