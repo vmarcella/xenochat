@@ -13,7 +13,7 @@ class Server extends Component {
         this.state = {
             channel: 'General',
             channels: ['General'],
-            onlineUsers: [this.props.user.firstName],
+            onlineUsers: [this.props.user.username],
             messages: [],
             currentMessage: '',
         }
@@ -73,10 +73,17 @@ class Server extends Component {
         })
     }
 
-    sendMessage = (message) => {
-        console.log(message);
+    sendMessage = () => {
+        // Msg object to send off to the server
+        const msg = {
+            user: this.props.user,
+            message: this.state.currentMessage,
+        }
+
+        // Create a new message and update all the sent messages on the frontend
         const newMessages = this.state.messages
-        newMessages.push(message)
+        newMessages.push(msg.message)
+
         this.setState({
             messages: newMessages,
             currentMessage: '',
@@ -149,7 +156,13 @@ class Server extends Component {
                                     />
                                     </Grid>
                                     <Grid item xs={1}>
-                                        <Button style={styles.messageButton} variant="outlined" onClick={() => this.sendMessage(this.state.currentMessage)}>Send</Button>
+                                        <Button 
+                                            style={styles.messageButton} 
+                                            variant="outlined" 
+                                            onClick={() => this.sendMessage()}
+                                        >
+                                            Send
+                                        </Button>
                                     </Grid>
                                 </Grid>
                             </Paper>

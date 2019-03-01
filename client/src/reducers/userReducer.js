@@ -17,7 +17,7 @@ const userReducer = (state=null, action) => {
             break;
         default:
             if (state === null) {
-                state = JSON.parse(localStorage.getItem('user'));
+                state = JSON.parse(localStorage.getItem('xenoUser'));
                 console.log(state)
             }
             return state;
