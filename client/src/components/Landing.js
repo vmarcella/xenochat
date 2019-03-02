@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux'
 
 // Material imports
 import Paper from '@material-ui/core/Paper';
@@ -10,8 +11,18 @@ import CardContent from '@material-ui/core/CardContent';
 
 // Landing page 
 class Landing extends Component {
+    constructor(props) {
+        super(props);
+    }
 
     render() {
+
+        // Redirect the user to the chat if they're signed in
+        if(this.props.user) {
+            return (
+                <Redirect to="/chat"/>
+            )
+        }
         return (
 
             <Grid 
@@ -55,4 +66,14 @@ class Landing extends Component {
     }
 }
 
-export default Landing
+// Takes in the entire state and maps the application state to
+// props on the component
+const mapStateToProps = (state) => {
+    return {
+        user: state.user,
+    }
+}
+
+// Map everything to our object and connect our compnent to the redux store
+export default connect(mapStateToProps)(Landing);
+
