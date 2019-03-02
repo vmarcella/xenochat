@@ -5,17 +5,17 @@ const socket = openSocket('http://localhost:8000');
 // to be made to the client when a socket event is triggered
 const registerListeners = (client) => {
     socket.on('new user', (username) => {
-        client.updates.newUser(username);
+        client.updates.receiveNewUser(username);
     }) 
 
-    socket.on('new message', (data) => {
-        if (client.channel === data.channel) {
-            client.updates.newMessage(data);
+    socket.on('new message', (msg) => {
+        if (client.channel === msg.channel) {
+            client.updates.receiveNewMessage(msg);
         }
     });
 
     socket.on('new channel', (channel) => {
-        client.udpates.newChannel(channel);
+        client.udpates.receiveNewChannel(channel);
     })
 
     socket.on('user changed channel', (data) => {
@@ -23,18 +23,19 @@ const registerListeners = (client) => {
     })
 
     socket.on('get online users', (onlineUsers) => {
-        client.updates.onlineUsers(onlineUsers);
+        client.updates.receiveOnlineUsers(onlineUsers);
     });
 
     socket.on('user has left', (onlineUsers) => {
-        client.updates.onlineUsers(onlineUsers)
+        client.updates.receiveOnlineUsers(onlineUsers)
     })
 }
 
 // Connect to the server when the user has signed into it
 export const connectToServer = (client) => {
-    socket.emit('new user', client.user.username)
     registerListeners(client);
+    
+    socket.emit('new user', client.user)
 }
 
 // Send a message to the server

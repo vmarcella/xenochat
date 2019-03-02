@@ -7,13 +7,14 @@ import Message from './Message';
 
 import { loginUser, logoutUser } from '../../actions/user';
 
+// Server component for rendering chat rooms
 class Server extends Component {
     constructor(props) {
         super(props);
         this.state = {
             channel: 'General',
             channels: ['General'],
-            onlineUsers: [this.props.user.username],
+            onlineUsers: [],
             messages: [],
             currentMessage: '',
         }
@@ -26,11 +27,11 @@ class Server extends Component {
             user: this.props.user,
             channel: this.state.channel,
             updates: {
-                newUser: this.newUser,
-                newMessage: this.newMessage,
-                newChannel: this.newChannel,
-                changeChannel: this.changeChannel,
-                onlineUsers: this.onlineUsers,
+                receiveNewUser: this.receiveNewUser,
+                receiveNewMessage: this.recieveNewMessage,
+                receiveNewChannel: this.newRecieveChannel,
+                receiveChangeChannel: this.receiveChangeChannel,
+                receiveOnlineUsers: this.recieveOnlineUsers,
             }
         }
         // Connect the client to the server with any information that will be needed 
@@ -39,7 +40,7 @@ class Server extends Component {
     }
 
     // create a new user
-    newUser = (username) => {
+    receiveNewUser = (username) => {
         console.log(username)
         const onlineUsers = this.state.onlineUsers;
         onlineUsers.push(username)
@@ -47,15 +48,15 @@ class Server extends Component {
     }
 
     // create a new message
-    newMessage = (msg) => {
+    recieveNewMessage = (msg) => {
         const messages = this.state.messages;
         messages.push(msg);
 
-        this.setState({ messages })
+        this.setState({ messages: messages })
     }
 
     // create a new channel
-    newChannel = (channel) => {
+    receiveNewChannel = (channel) => {
         const channels = this.state.channels;
         channels.push(channel);
         this.setState({ channels })
@@ -67,7 +68,12 @@ class Server extends Component {
     }
 
     // Get all online users 
-    onlineUsers = (onlineUsers) => {
+    recieveOnlineUsers = (allUsers) => {
+        let onlineUsers = [];
+        console.log(allUsers)
+        for (let key in allUsers) {
+            onlineUsers.push(key)
+        }
         this.setState({ onlineUsers });
     }
 
@@ -77,7 +83,10 @@ class Server extends Component {
         })
     }
 
-    sendMessage = () => {
+    sendNewMessage = () => {
+        if(this.state.currentMessage.length < 1) {
+            return
+        }
         // Msg object to send off to the server
         const msg = {
             username: this.props.user.username,
@@ -90,7 +99,6 @@ class Server extends Component {
 
         // Update the users state
         this.setState({
-            messages: newMessages,
             currentMessage: '',
         })
 
@@ -167,7 +175,7 @@ class Server extends Component {
                                         <Button 
                                             style={styles.messageButton} 
                                             variant="outlined" 
-                                            onClick={() => this.sendMessage()}
+                                            onClick={() => this.sendNewMessage()}
                                         >
                                             Send
                                         </Button>

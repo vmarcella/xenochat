@@ -11,12 +11,15 @@ const handleChat = (io, socket, serverInfo) => {
 
         // Alert all users that someone has entered the chat room
         io.emit('new user', user.username);
+        socket.emit('get online users', serverInfo.onlineUsers)
     });
 
     // When a new message has been sent by a user 
-    socket.on('new message', (data) => {
-        console.log(`${data.sender}: ${data.message}`);
-        io.to(data.channel).emit('new message', data.message);
+    socket.on('new message', (msg) => {
+        console.log(`${msg.username}: ${msg.message}`);
+        msg.channel = socket.channel;
+        io.to(socket.channel).emit('new message', msg);
+
     });
 
     // When a new channel has been created
@@ -42,7 +45,7 @@ const handleChat = (io, socket, serverInfo) => {
     // When the client disconnects
     socket.on('disconnect', () => {
         delete serverInfo.onlineUsers[socket.username];
-        io.emit('user has left', serverInfo.onlineUsers);
+        io.emit('get online users', serverInfo.onlineUsers);
     });
 }
 
