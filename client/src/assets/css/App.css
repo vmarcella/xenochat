@@ -1,5 +1,11 @@
 :root {
-    
+
+
+
+}
+
+.tile {
+    height: 20px !important;
 }
 body {
     font-family: Roboto;
@@ -13,7 +19,8 @@ body {
 /*
  * LANDING COMPONENT CSS
  */
-
+.MuiGridListTile-root-162 {
+}
 .landing {
     height: 100%;
 }

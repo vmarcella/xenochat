@@ -122,9 +122,9 @@ class Server extends Component {
                         <Grid item xs={6} md={6} lg={4} style={styles.activeChannels}> 
                             <Typography style={styles.headerText} variant="h3">Active channels</Typography>
                             <Paper>
-                                <GridList style={styles.channelList} cellHeight={20}>
+                                <GridList style={styles.channelList} cellHeight="20">
                                     {Array.from(this.state.channels).map((channel) => (
-                                        <GridListTile style={{textAlign: 'center', width:'100%'}}>
+                                        <GridListTile component="div" style={{textAlign: 'center', width:'100%', height:'20px !important'}}>
                                                 <Typography color="primary" variant="p">{channel}</Typography>
                                         </GridListTile>
                                     ))}
@@ -135,9 +135,9 @@ class Server extends Component {
                         <Grid item xs={6} md={6} lg={4} style={styles.activeUsers}>
                             <Typography style={styles.headerText} variant="h3">Active users</Typography>
                             <Paper>
-                                <GridList style={styles.userList}>
+                                <GridList style={styles.userList} cellHeight={20} >
                                     {Array.from(this.state.onlineUsers).map((user) => (
-                                        <GridListTile style={{textAlign: 'center', width:'100%'}}>
+                                        <GridListTile cellHeight="20" style={{display: 'block', textAlign: 'center', width:'100%',}}>
                                                 {(user === this.props.user.username &&
                                                 <Typography color="primary" variant="p">{user}</Typography>
                                                 ) || 
@@ -216,11 +216,13 @@ const styles = {
     },
     channelList: {
         height: 200,
-        maxHeight: '100%'
+        maxHeight: '100%',
+        alignItems: 'space-between'
     },
     userList: {
         height: 200,
         maxHeight: '100%',
+        display: 'block',
     },
     messageContainer: {
         margin: '80px 0',
@@ -229,7 +231,8 @@ const styles = {
     },
     messageList: {
         height: 300,
-        width: '100%'
+        width: '100%',
+        display: 'block',
     },
     messageInput: {
         marginTop: 0,

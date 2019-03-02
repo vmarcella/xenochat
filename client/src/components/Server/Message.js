@@ -5,7 +5,7 @@ export default (props) => {
     return (
         <>
             <Typography variant="body1" color="primary">{props.user}</Typography>
-            <Typography color="secondary" variant="body2">{props.message}</Typography>
+            <Typography style={styles.message} color="secondary" variant="body2">{props.message}</Typography>
         </>
     ) 
 }
@@ -16,7 +16,6 @@ const styles = {
         width: '20%',
     },
     message: {
-        height: 40,
-        width: '80%',
+        marginLeft: 10,
     }
 }
