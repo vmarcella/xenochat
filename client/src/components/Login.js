@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
+import { loginUser } from '../actions/user';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper'
@@ -16,12 +19,18 @@ class Login extends Component {
     }
 
     render() {
+        // handle updates for input
         const handleChange = (e) => {
             this.setState({
                 [e.target.name]: e.target.value,
             })
         }
+
+        if (this.props.user !== null) {
+            return (<Redirect to="chat"></Redirect>)
+        }
         return (
+
             <Grid
                     container
                     justify="center"
@@ -31,7 +40,7 @@ class Login extends Component {
                     <Grid item xs={4}>
                         <Paper className="registerContainer">
                             <h1>Sign in to Xenochat</h1>
-                            <ValidatorForm autoComplete="off" className="registerForm">
+                            <ValidatorForm onSubmit={() => this.props.loginUser(this.state)}autoComplete="off" className="registerForm">
                                 <TextValidator
                                     id="name"
                                     label="Username"
@@ -50,7 +59,7 @@ class Login extends Component {
                                     label="Password"
                                     name="password"
                                     type="password"
-                                    value={this.state.email}
+                                    value={this.state.password}
                                     onChange={handleChange}
                                     margin="normal"
                                     className="registerInput"
@@ -58,7 +67,7 @@ class Login extends Component {
                                     errorMessages={['This field is required!']}
                                     required
                                 />
-                                <Button color="primary" type="submit" className="registerFormBtn">
+                                <Button color="primary" type="submit" className="registerFormBtn" onclick={() => this.props.loginUser() }>
                                     Submit
                                 </Button>
                             </ValidatorForm>
@@ -69,4 +78,21 @@ class Login extends Component {
     }
 }
 
-export default Login;
+// Takes in the entire state and maps the application state to
+// props on the component
+const mapStateToProps = (state) => {
+    return {
+        user: state.user,
+    }
+}
+
+// Maps the dispatch functions to 
+// component props
+const mapDispatchToProps = () => {
+    return {
+        loginUser,
+    }
+}
+
+// Map everything to our object and connect our compnent to the redux store
+export default connect(mapStateToProps, mapDispatchToProps())(Login);

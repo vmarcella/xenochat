@@ -39,7 +39,7 @@ class Server extends Component {
         connectToServer(client);
     }
 
-    // create a new user
+    // handle when a new user joins the chat
     receiveNewUser = (username) => {
         console.log(username)
         const onlineUsers = this.state.onlineUsers;
@@ -47,7 +47,7 @@ class Server extends Component {
         this.setState({onlineUsers})
     }
 
-    // create a new message
+    // handle when a new message is sent 
     recieveNewMessage = (msg) => {
         console.log(msg)
         const messages = this.state.messages;
@@ -56,19 +56,19 @@ class Server extends Component {
         this.setState({ messages: messages })
     }
 
-    // create a new channel
+    // handle when a new channel is created
     receiveNewChannel = (channel) => {
         const channels = this.state.channels;
         channels.push(channel);
         this.setState({ channels })
     }
 
-    // Change the current channel
+    // TODO setup changing the channel
     changeChannel = (channel) => {
         
     }
 
-    // Get all online users 
+    // Handle receiving a new user 
     recieveOnlineUsers = (allUsers) => {
         let onlineUsers = [];
         console.log(allUsers)
@@ -78,12 +78,14 @@ class Server extends Component {
         this.setState({ onlineUsers });
     }
 
+    // Update the message being typed in
     updateMessage = (e) => {
         this.setState({
             currentMessage: e.target.value,
         })
     }
 
+    // Send a new message
     sendNewMessage = () => {
         if(this.state.currentMessage.length < 1) {
             return
@@ -124,7 +126,7 @@ class Server extends Component {
                             <Paper>
                                 <GridList style={styles.channelList} cellHeight="20">
                                     {Array.from(this.state.channels).map((channel) => (
-                                        <GridListTile component="div" style={{textAlign: 'center', width:'100%', height:'20px !important'}}>
+                                        <GridListTile style={{textAlign: 'center', width:'100%'}}>
                                                 <Typography color="primary" variant="p">{channel}</Typography>
                                         </GridListTile>
                                     ))}
@@ -137,7 +139,7 @@ class Server extends Component {
                             <Paper>
                                 <GridList style={styles.userList} cellHeight={20} >
                                     {Array.from(this.state.onlineUsers).map((user) => (
-                                        <GridListTile cellHeight="20" style={{display: 'block', textAlign: 'center', width:'100%',}}>
+                                        <GridListTile cellHeight="20" style={{textAlign: 'center', width:'100%',}}>
                                                 {(user === this.props.user.username &&
                                                 <Typography color="primary" variant="p">{user}</Typography>
                                                 ) || 
@@ -172,7 +174,7 @@ class Server extends Component {
                                         variant="outlined"
                                         style={styles.messageInput}
                                         onChange={this.updateMessage}
-                                        value={this.state.currentMessage}
+                                        value={this.state.currentMessage}a
                                     />
                                     </Grid>
                                     <Grid item xs={1}>

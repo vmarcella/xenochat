@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import { connect } from 'react-redux';
 import { registerUser } from '../actions/user';
+import { Redirect } from 'react-router-dom';
 
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
@@ -31,6 +32,11 @@ class Register extends Component {
                 [event.target.name]: event.target.value,
             }) 
         }
+
+        if (this.props.user !== null) {
+            return (<Redirect to="/chat"></Redirect>)
+        }
+
         return (
             <Grid
                 container
