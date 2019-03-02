@@ -136,12 +136,12 @@ class Server extends Component {
                         </Grid>
                         <Grid item xs={6} md={6} lg={4} style={styles.activeUsers}>
                             <Typography style={styles.headerText} variant="h3">Active users</Typography>
-                            <Paper>
+                            <Paper style={{marginBottom: 40}}>
                                 <GridList style={styles.userList} cellHeight={20} >
                                     {Array.from(this.state.onlineUsers).map((user) => (
                                         <GridListTile cellHeight="20" style={{textAlign: 'center', width:'100%',}}>
                                                 {(user === this.props.user.username &&
-                                                <Typography color="primary" variant="p">{user}</Typography>
+                                                    <Typography color="primary" variant="p">{">" + user + "<"}</Typography>
                                                 ) || 
                                                 <Typography color="secondary" variant="p">{user}</Typography>
                                                 }
@@ -154,7 +154,7 @@ class Server extends Component {
                     <Grid style={styles.messageContainer} container justify="center">
                         <Grid item xs={12} md={8} lg={8}>
                             <Typography style={styles.headerText} variant="h3">Currently speaking in {this.state.channel}</Typography>
-                            <Paper>
+                            <Paper style={{marginBottom: 40, flexShrink: '2'}}>
                                 <GridList style={styles.messageList} cols={1} cellHeight={50} spacing={1}>
                                     {Array.from(this.state.messages).map((msg) => (
                                         <GridListTile>
@@ -164,8 +164,8 @@ class Server extends Component {
                                         </GridListTile>
                                     ))}
                                 </GridList>
-                                <Grid container> 
-                                    <Grid item xs={11}>
+                                <Grid container justify="flex-start"> 
+                                    <Grid item xs={10} md={11} lg={1}>
                                     <TextField
                                         id="outlined-text"
                                         label="Enter a message"
@@ -177,7 +177,7 @@ class Server extends Component {
                                         value={this.state.currentMessage}a
                                     />
                                     </Grid>
-                                    <Grid item xs={1}>
+                                    <Grid item xs={2} md={1} lg={1}>
                                         <Button 
                                             style={styles.messageButton} 
                                             variant="outlined" 
@@ -209,6 +209,7 @@ const styles = {
     activeContainer: {
         margin: '30px 0',
         height: 200,
+        marginBottom: '125px'
     },
     activeChannels: {
         padding: '0 10px',
@@ -245,7 +246,8 @@ const styles = {
     messageButton: {
         color: '#15878F',
         width: '100%',
-        height:'100%'
+        height:'100%',
+        maxWidth: '100% !important',
     }
     
 } 
