@@ -49,6 +49,7 @@ class Server extends Component {
 
     // create a new message
     recieveNewMessage = (msg) => {
+        console.log(msg)
         const messages = this.state.messages;
         messages.push(msg);
 
@@ -91,11 +92,10 @@ class Server extends Component {
         const msg = {
             username: this.props.user.username,
             message: this.state.currentMessage,
+            channel: this.state.channel
         }
 
         // Create a new message and update all the sent messages on the frontend
-        const newMessages = this.state.messages
-        newMessages.push(msg)
 
         // Update the users state
         this.setState({
@@ -103,7 +103,7 @@ class Server extends Component {
         })
 
         // Emit the message to the server after it has been reflected on the users side
-        newMessage(msg);
+        newMessage(msg)
 
     }
     render() {
@@ -138,7 +138,11 @@ class Server extends Component {
                                 <GridList style={styles.userList}>
                                     {Array.from(this.state.onlineUsers).map((user) => (
                                         <GridListTile style={{textAlign: 'center', width:'100%'}}>
+                                                {(user === this.props.user.username &&
                                                 <Typography color="primary" variant="p">{user}</Typography>
+                                                ) || 
+                                                <Typography color="secondary" variant="p">{user}</Typography>
+                                                }
                                         </GridListTile>
                                     ))}
                                 </GridList>

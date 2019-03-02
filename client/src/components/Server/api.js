@@ -9,6 +9,7 @@ const registerListeners = (client) => {
     }) 
 
     socket.on('new message', (msg) => {
+        console.log(msg)
         if (client.channel === msg.channel) {
             client.updates.receiveNewMessage(msg);
         }

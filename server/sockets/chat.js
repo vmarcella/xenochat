@@ -17,8 +17,8 @@ const handleChat = (io, socket, serverInfo) => {
     // When a new message has been sent by a user 
     socket.on('new message', (msg) => {
         console.log(`${msg.username}: ${msg.message}`);
-        msg.channel = socket.channel;
-        io.to(socket.channel).emit('new message', msg);
+        console.log(msg.channel);
+        io.emit('new message', msg);
 
     });
 
