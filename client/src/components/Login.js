@@ -27,7 +27,7 @@ class Login extends Component {
         }
 
         if (this.props.user !== null) {
-            return (<Redirect to="chat"></Redirect>)
+            return (<Redirect to="/chat"></Redirect>)
         }
         return (
 
