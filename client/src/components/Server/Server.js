@@ -165,7 +165,7 @@ class Server extends Component {
                                     ))}
                                 </GridList>
                                 <Grid container justify="flex-start"> 
-                                    <Grid item xs={10} md={11} lg={1}>
+                                    <Grid item xs={10} md={11} lg={11}>
                                     <TextField
                                         id="outlined-text"
                                         label="Enter a message"
