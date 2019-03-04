@@ -51,7 +51,7 @@ router.post('/signup', async (req, res, next) => {
 // Log the user into the chat server
 router.post('/login', async (req, res) => {
     try {
-        const user = await User.findOne({ username: req.body.username }).select('username password');
+        const user = await User.findOne({ username: req.body.username }).select('username email password');
 
         // Compare the password against the one the user has entered
         user.comparePassword(req.body.password, (err, isMatch) => {
@@ -76,15 +76,16 @@ router.post('/login', async (req, res) => {
                     _id: user._id,
                     token,
                 };
-
                 const mail = {
                     from: process.env.EMAIL,
                     to: user.email,
                     subject: 'Sign in',
                     text: `We just received a sign in for your account: ${user.username}
-                        if this was you, then you can ignore this message 
-                    `
-                }
+                    if this was you, then you can ignore this message. 
+                    `,
+                };
+
+                sgMail.send(mail);
                 return res.json(xenoUser);
             }
 
