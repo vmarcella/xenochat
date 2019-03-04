@@ -23,6 +23,7 @@ const socketSetup = require('./sockets');
 const app = express();
 const server = http.Server(app);
 
+// Setup the sockets for the server;
 socketSetup.createSocket(server);
 
 // Register middleware
@@ -36,7 +37,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/auth', authRouter);
-
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
@@ -53,8 +53,10 @@ app.use((err, req, res) => {
     res.status(err.status || 500).json(res.locals);
 });
 
-module.exports = app;
 
+// Listen for when a connection is opened
 server.listen(8000, () => {
     console.log('Server is active')
 })
+
+module.exports = app;
