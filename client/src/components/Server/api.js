@@ -34,7 +34,7 @@ const registerListeners = (client) => {
 
 // Connect to the server when the user has signed into it
 export const connectToServer = (client) => {
-    socket = openSocket('https://xenochat-vm.herokuapp.com')
+    socket = openSocket(process.env.PROD_URI || 'https://xenochat-vm.herokuapp.com')
     registerListeners(client);
     
     socket.emit('new user', client.user)
