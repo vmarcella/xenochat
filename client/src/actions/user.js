@@ -23,8 +23,11 @@ export const loginUser = (formData) => {
     return async (dispatch) => {
         try {
             const res = await axios.post('/auth/login', formData);
-            localStorage.setItem('xenoUser', JSON.stringify(res.data));
-            return dispatch(register(res.data));
+            if (!res.data.err) {
+                localStorage.setItem('xenoUser', JSON.stringify(res.data));
+                return dispatch(register(res.data));
+            }
+
         } catch(err) {
             console.error(err);
         }

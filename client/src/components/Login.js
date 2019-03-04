@@ -67,7 +67,7 @@ class Login extends Component {
                                     errorMessages={['This field is required!']}
                                     required
                                 />
-                                <Button color="primary" type="submit" className="registerFormBtn" onclick={() => this.props.loginUser() }>
+                                <Button color="primary" type="submit" className="registerFormBtn">
                                     Submit
                                 </Button>
                             </ValidatorForm>
