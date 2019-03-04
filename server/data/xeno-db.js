@@ -5,7 +5,7 @@ mongoose.Promise = global.Promise;
 // Function for connecting to the database
 const connect = async (mongoDBUrl) => {
     try {
-        await mongoose.connect(process.env.MONGODB_URL || mongoDBUrl, { useNewUrlParser: true });
+        await mongoose.connect(process.env.MONGODB_URI || mongoDBUrl, { useNewUrlParser: true });
         mongoose.set('debug', true);
 
         // eslint-disable-next-line
