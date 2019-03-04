@@ -1,0 +1,19 @@
+{
+  "version": 2,
+  "name": "xenochat",
+  "alias": "xenochat.now.sh",
+  "routes": [
+    { "src": "/socket.io.*", "dest": "https://xenochat-vm.herokuapp.com" },
+    { "src": "/auth.*", "dest": "https://xenochat-vm.herokuapp.com" },
+    { "src": "/register", "dest": "/" },
+    { "src": "/login", "dest": "/" },
+    { "src": "/chat", "dest": "/" }
+  ],
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@now/static-build",
+      "config": { "distDir": "build" }
+    }
+  ]
+}
