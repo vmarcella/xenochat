@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Button, GridList, GridListTile, Grid, Paper, Typography, TextField } from '@material-ui/core'
 import { connectToServer, newMessage, newChannel } from './api';
+import { Redirect } from 'react-router-dom';
 
 import Message from './Message';
 
@@ -194,6 +195,7 @@ class Server extends Component {
                </>
             )
         }
+        return <Redirect to="/"></Redirect>
     }
 }
 

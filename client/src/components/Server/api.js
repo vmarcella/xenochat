@@ -1,5 +1,5 @@
 import openSocket from 'socket.io-client';
-const socket = openSocket('http://localhost:8000');
+let socket;
 
 // Register listeners for our client and all the callbacks that need 
 // to be made to the client when a socket event is triggered
@@ -34,6 +34,7 @@ const registerListeners = (client) => {
 
 // Connect to the server when the user has signed into it
 export const connectToServer = (client) => {
+    socket = openSocket('http://localhost:8000')
     registerListeners(client);
     
     socket.emit('new user', client.user)
