@@ -4,7 +4,7 @@
   "alias": "xenochat.now.sh",
   "routes": [
     { "src": "/socket.io.*", "dest": "https://xenochat-vm.herokuapp.com" },
-    { "src": "/auth.*", "dest": "https://xenochat-vm.herokuapp.com" },
+    { "src": "/api.*", "dest": "https://xenochat-vm.herokuapp.com" },
     { "src": "/register", "dest": "/" },
     { "src": "/login", "dest": "/" },
     { "src": "/chat", "dest": "/" }

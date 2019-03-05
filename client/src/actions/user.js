@@ -9,7 +9,7 @@ export const LOGOUT = 'LOGOUT';
 export const registerUser = (formData) => {
     return async (dispatch) => {
         try {
-            const res = await axios.post('/auth/signup', formData);
+            const res = await axios.post('/api/v1/auth/signup', formData);
             localStorage.setItem('xenoUser', JSON.stringify(res.data));
             return dispatch(register(res.data)); 
         } catch(err) {
@@ -22,7 +22,7 @@ export const registerUser = (formData) => {
 export const loginUser = (formData) => {
     return async (dispatch) => {
         try {
-            const res = await axios.post('/auth/login', formData);
+            const res = await axios.post('/api/v1/auth/login', formData);
             if (!res.data.err) {
                 localStorage.setItem('xenoUser', JSON.stringify(res.data));
                 return dispatch(register(res.data));
