@@ -1,20 +1,20 @@
 // Import npm modules
-const express = require('express');
 const jwt = require('jsonwebtoken');
-const sgMail = require('@sendgrid/mail');
 
 // Import the user model
 const User = require('../models/User');
 
-const router = express.Router();
-sgMail.setApiKey(process.env.SG_API_KEY);
+const { sendMail } = require('../lib/mail');
 
 // Sign up route
-router.post('/signup', async (req, res, next) => {
+const signup = async (req, res, next) => {
     const user = new User(req.body);
+    const xenoUser = {};
 
     try {
         const savedUser = await user.save();
+
+        // Create the jwt token for user authentication
         const token = jwt.sign({
             _id: savedUser._id,
             username: user.username,
@@ -22,34 +22,23 @@ router.post('/signup', async (req, res, next) => {
             expiresIn: '60 days',
         });
 
-        // What to send the user for storage
-        const xenoUser = {
-            username: user.username,
-            _id: savedUser._id,
-            token,
-        };
-
-        const mail = {
-            from: process.env.EMAIL,
-            to: user.email,
-            subject: 'Thanks for signing up for xenochat',
-            text: `
-            Weclome to xenochat, ${user.username}! We hope that you enjoy the
-            chatroom we continue to build out and look forward to any feedback you
-            may have.
-            `,
-        };
-
-        sgMail.send(mail);
-
-        return res.json(xenoUser);
+        // set the user properties to be sent back
+        xenoUser.username = user.username;
+        xenoUser._id = savedUser._id;
+        xenoUser.token = token;
     } catch (err) {
         next(err);
     }
-});
+
+    // Create mail info and send it off to our mailer
+    const mailInfo = { user };
+    sendMail('signup', mailInfo);
+
+    return res.json(xenoUser);
+};
 
 // Log the user into the chat server
-router.post('/login', async (req, res) => {
+const login = async (req, res) => {
     try {
         const user = await User.findOne({ username: req.body.username }).select('username email password');
 
@@ -76,20 +65,14 @@ router.post('/login', async (req, res) => {
                     _id: user._id,
                     token,
                 };
-                const mail = {
-                    from: process.env.EMAIL,
-                    to: user.email,
-                    subject: 'Sign in',
-                    text: `We just received a sign in for your account: ${user.username}
-                    if this was you, then you can ignore this message. 
-                    `,
-                };
 
-                sgMail.send(mail);
+                // Send a login confirmation email to the user
+                const mailInfo = { user }
+                sendMail('login', mailInfo);
                 return res.json(xenoUser);
             }
 
-            // Passwords dont match, error
+            // Passwords dont match, throw an error
             return res.json({
                 err: 'pword mismatch',
                 body: 'Passwords did not match',
@@ -98,6 +81,9 @@ router.post('/login', async (req, res) => {
     } catch (err) {
         res.json(err);
     }
-});
+};
 
-module.exports = router;
+module.exports = {
+    signup,
+    login,
+};
