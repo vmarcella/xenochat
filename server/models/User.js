@@ -25,7 +25,7 @@ const userSchema = new Schema({
 });
 
 // handle when the user has updated their password
-userSchema.pre('save', function(next) {
+userSchema.pre('save', function (next) {
     const user = this;
 
     if (user.isModified('password')) {
@@ -36,16 +36,16 @@ userSchema.pre('save', function(next) {
                 user.password = hash;
                 return next();
             });
-        })
+        });
     }
 });
 
 // Create a function which will allow us to securely compare passwords
 // of users that are stored within the database
-userSchema.methods.comparePassword = function(password, done) {
+userSchema.methods.comparePassword = function (password, done) {
     bcrypt.compare(password, this.password, (err, isMatch) => {
         done(err, isMatch);
     });
-}
+};
 
 module.exports = mongoose.model('User', userSchema);
