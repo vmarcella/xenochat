@@ -32,11 +32,11 @@ const newMessage = async (server, msg) => {
 const disconnect = (server) => {
     delete server.info.onlineUsers[server.socket.username];
     server.io.emit('get online users', server.info.onlineUsers);
-}
+};
 
 module.exports = {
     newUser,
     newMessage,
     getOnlineUsers,
-    disconnect
+    disconnect,
 };
