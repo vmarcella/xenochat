@@ -4,6 +4,8 @@ import { Button, GridList, GridListTile, Grid, Paper, Typography, TextField } fr
 import { connectToServer, newMessage, newChannel } from './api';
 import { Redirect } from 'react-router-dom';
 
+import axios from 'axios';
+
 import Message from './Message';
 
 import { loginUser, logoutUser } from '../../actions/user';
@@ -40,6 +42,25 @@ class Server extends Component {
         connectToServer(client);
     }
 
+    getMessages = async () => {
+        const axiosConfig = {
+            header: {
+                Authorization: `Bearer ${this.props.user.token}`
+            }
+        }
+
+        try {
+            const response = axios.get('/api/v1/', axiosConfig);
+            const messages = response.data;
+
+            this.setState({
+                messages,
+            })
+
+        } catch (err) {
+            console.error(err);
+        }
+    }
     // handle when a new user joins the chat
     receiveNewUser = (username) => {
         console.log(username)
